@@ -1,0 +1,40 @@
+{% extends 'shop/shop_home.html' %}
+
+{% block content %}
+    <div class="container-fluid bg-primary hero-header mb-5">
+        <div class="container text-center">
+            <h1 class="display-4 text-white mb-3 animated slideInDown">Notifications....</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="mb-0">Notifications</h2>
+                    </div>
+                    <div class="card-body">
+                        {% if notifications %}
+                            <ul class="list-group">
+                                {% for notification in notifications %}
+                                    <li class="list-group-item">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <strong>{{ notification.message }}</strong> 
+                                                {{ notification.timestamp|date:"F d, Y H:i" }}
+                                            </div>
+                                            <!-- <span class="badge badge-secondary">{{ notification.timestamp|date:"F d, Y H:i" }}</span> -->
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="text-muted">No notifications available.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div><br><br><br>
+    </div>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'shop/shop_home.html' %}
+{% block content %}
+<div class="container-fluid bg-primary hero-header mb-5">
+    <div class="container text-center">
+        <h1 class="display-4 text-white mb-3 animated slideInDown">Add Details...</h1>
+       
+    </div>
+</div>
+
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <img class="img-fluid animated pulse infinite" src="/static/img/shampoo-1.png">
+            </div>
+            <div class="col-lg-6 p-0">
+                <div class="container p-0">
+                    <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+                        <h1 class="text-primary mb-5"><span class="fw-light text-dark"></span></h1></div>
+                    <div class="row g-5">
+                        <div class="col-lg-12 wow fadeIn" data-wow-delay="0.1s">
+                            
+                            <div class="wow fadeIn" data-wow-delay="0.3s">
+                                {% for i in data %}
+                                <form action="{% url 'shop_edit_product' id=i.id %}" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="mail" class="form-control" id="subject" placeholder="Your Name" name="lname"  value="{{i.lname}}">
+                                                <label for="subject"> Labour name</label>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="mail" class="form-control" id="subject" placeholder="Your Email" name="phn" value="{{i.phn}}" >
+                                                <label for="subject"> Contact Number</label>
+                                            </div>
+                                        </div>
+        
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="subject" placeholder="Your Username" name="adrs"  value="{{i.adrs}}">
+                                                <label for="subject">Address</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="subject" placeholder="Your Password" name="pname" value="{{i.pname}}" required>
+                                                <label for="message"> Product Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="subject" placeholder="Your Address" name="amnt" value="{{i.amnt}}" required>
+                                                <label for="message"> Price</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="number" class="form-control" id="subject" placeholder="Your Contact Number" name="qnty" value="{{i.qnty}}" required>
+                                                <label for="message"> Quantity</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="col-12">
+                                                <div class="form-floating">
+                                                    <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px" name="description" value="{{i.description}}">{{i.description}}</textarea>
+                                                    <label for="message">Product Description</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="file" class="form-control" id="subject" placeholder="Your Contact Number" name="files" required value="{{i.files.url}}">
+                                                <label for="message"> Product Details</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="file" class="form-control" id="subject" placeholder="Your Contact Number" name="img" required value="{{i.img.url}}">
+                                                <label for="message"> Product image</label>
+                                            </div>
+                                        </div>
+                                    
+                                    
+                                        
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100 py-3" type="submit">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                {% endfor %}
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid newsletter bg-primary py-5 my-5">
+    <div class="container py-5">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="text-white mb-3"><span class="fw-light text-dark"></h1>
+            <p class="text-white mb-4"></p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-7 wow fadeIn" data-wow-delay="0.5s">
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

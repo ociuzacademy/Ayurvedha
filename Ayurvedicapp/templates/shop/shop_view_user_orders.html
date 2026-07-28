@@ -1,0 +1,94 @@
+{% extends 'shop/shop_home.html' %}
+{% block content %}
+<div class="container-fluid bg-primary hero-header mb-5">
+    <div class="container text-center">
+        <h1 class="display-4 text-white mb-3 animated slideInDown"> Orders</h1>
+       
+    </div>
+</div>
+
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="text-primary mb-5"><span class="fw-light text-dark"></span></h1>
+        </div>
+        <div class="row g-25">
+            <div class="col-lg-30 wow fadeIn" data-wow-delay="0.1s">
+                <div class="wow fadeIn" data-wow-delay="0.3s">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <table class="table" border="1" style="color: black;">
+                            <thead>
+                                <tr>
+                                    <th>Sl.No.</th>
+                                    <th>Name       </th>
+                                    <th>Phone</th>
+                                     <th>Email</th>
+                                     <th>Product Name</th>
+                                     <th>Product Amount</th>
+                                     <th>Quantity</th>
+                                     <!-- <th>Total Price</th> -->
+                                     <th>Payment Status</th>
+                                     <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for x in data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{x.user_id.name}}</td>
+                                    <td>{{x.user_id.phn}}</td>
+                                    <td>{{x.user_id.email}}</td>
+                                    <td>{{x.product_id.pname}}</td>
+                                    <td>{{x.product_id.amnt}}</td>
+                                    <td>{{x.cart_id.qnty}}</td>
+                                    <!-- <td>{{x.total}}</td> -->
+                                    <td>{{x.payment_status}}</td>
+                                    <td><a href="/dispatch_order/{{x.id}}/" class="btn btn-warning">Dispatch</a></td>
+
+                                    
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid newsletter bg-primary py-5 my-5">
+    <div class="container py-5">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="text-white mb-3"><span class="fw-light text-dark"></h1>
+            <p class="text-white mb-4"></p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-7 wow fadeIn" data-wow-delay="0.5s">
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .table {
+        width: 105%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+        background-color: #f2f6e9; /* Set your desired background color here */
+    }
+
+    .table th, .table td {
+        border: 1px solid #f0e9e9;
+        padding: 9px;
+        text-align: left;
+    }
+
+    .table th {
+        background-color: #c1f2a9;
+    }
+</style>
+
+
+{% endblock %}

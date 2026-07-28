@@ -1,0 +1,191 @@
+{% extends 'User/user_home.html' %}
+{% block content %}
+
+<div class="container-fluid bg-primary hero-header mb-5">
+    <div class="container text-center">
+      {% if error %}
+      <h1 class="display-4 text-white mb-3 animated slideInDown">My Cart</h1>
+       {% else %}
+        <h1 class="display-4 text-white mb-3 animated slideInDown"> My Cart</h1>
+        {% endif %}
+       
+    </div>
+</div>
+<style type="text/css">
+	th{
+		/*background-color: #999999;*/
+		color: white;
+	}
+</style>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+
+<div class="container">
+<div class="w3l_banner_nav_right">
+	<div class="container" style="padding-top: 100px;"></div>
+		<!-- <h3>All Products</h3> -->
+		<br>
+        <div class="col-md-10 agileinfo_mail_grid_right">
+
+	    <div class="w3l-contact-10 py-5" id="contact">
+        <div class="form-41-mian pt-lg-4 pt-md-3 pb-4">
+        <div class="container">
+        <div class="row">
+        <div class="col-lg-12 form-inner-cont">
+  <!-- ********************************************** -->
+            
+            </div> 
+            <form action="{% url 'cart_product_payment' %}" method="POST">
+            {% csrf_token %}
+
+                <!-- <div class="gallery"> -->
+                 <div class="col-lg-12">
+                    <div class="row">
+                        {% for x in var %}
+
+                        <div class="col-lg-6 mb-3">
+                            <table>
+                                <tr>
+                                    <td><img src="{{x.product_id.img.url}}" alt=" " width="200" height="200"> </td>
+                                    <td> <center>
+                                        Quantity:{{x.qnty}}<br>
+                                        Price:{{x.product_id.amnt}}/-<br>
+                                        Total Amount:{{x.total_price}}/-<br>
+                                        <input type="hidden" name="cart_id" value="{{x.id}}">
+                                        <input type="hidden" name="product_id" value="{{x.product_id.id}}">
+                                        </center></td>
+                                    <td>
+                                        <center> 
+                                        <a href="/delete_cart/?id={{x.id}}">
+                                        <i class="fa fa-trash" style="size: 800px;color: green;"></i>
+                                        </a>
+                                        </center> <br></td>
+            
+                                </tr>
+                            </table> 
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                 </div>   
+
+                
+            </div>
+                <br>
+
+                <div class="form-group"></div>
+        </div>
+
+
+
+  
+<script type="text/javascript">
+  function shlocaltotal()
+  {
+    var d=parseInt(document.getElementById("ld").value);
+    var d1=parseInt(document.getElementById("subtot").value);
+    totalprize=d+d1;
+    document.getElementById("total").innerHTML=totalprize;
+    document.getElementById("subtotal").value=totalprize;
+
+  }
+</script>
+<script type="text/javascript">
+  function shhometotal()
+  {
+    var d=parseInt(document.getElementById("hd").value);
+    var d1=parseInt(document.getElementById("subtot").value);
+    totalprize=d+d1;
+    document.getElementById("total").innerHTML=totalprize;
+    document.getElementById("subtotal").value=totalprize;
+  }
+</script>
+
+<!-- <form action="/cart_product_payment/" method="POST">
+  {% csrf_token %} -->
+  <br>
+  <div class="row">
+    <div class="col-md-6">
+                <h2 class="h3 mb-3 text-black font-heading-serif">Shipping</h2>
+                <div class="p-3 p-lg-5 border">
+                  <table class="table site-block-order-table mb-5">
+                    <thead>
+                      <th>Delivery</th>
+                      <th>Total</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                  <td class="text-black font-weight-bold"><strong>Local Delivery:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp50 </strong></td>
+                        <td class="text-black"><input type="radio" value=50
+                    id="ld" name="shipping" onclick="shlocaltotal()" required=""></td>
+                      </tr>
+                      <tr>
+                    <td class="text-black font-weight-bold"><strong>Home Delivery:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp100 </strong></td>
+                        <td class="text-black"><input type="radio" value=100
+                    id="hd" name="shipping" onclick="shhometotal()" required=""></td>
+                      </tr>
+                    </tbody>
+                  </table>
+    </div>
+  </div>
+    <div class="col-md-6">
+                <h2 class="h3 mb-3 text-black font-heading-serif">Grand Total</h2>
+                <div class="p-3 p-lg-5 border">
+                  <table class="table site-block-order-table mb-5">
+                    <thead>
+                      <th></th>
+                      <th></th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="text-black font-weight-bold"><strong>Subtotal&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</strong></td>
+                        <td class="text-black"><strong class="text-black" id="subtotal" name="total" >{{sum}}</strong></td>
+                        <input type="text" id="subtot" value={{sum}} name="subtotal" hidden="" >
+                      </tr>
+                      <tr>
+                        <td class="text-black font-weight-bold"><strong>Total&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</strong></td>
+                        <td class="text-black"><strong class="text-black" id="total" name="total" ></strong></td>
+                        <input type="text" id="subtotal"  name="subtotal" hidden="">
+                      </tr>
+                    </tbody>
+                  </table>
+    </div>
+  </div>
+  <center>
+   <div class="p-3 p-lg-5 border">
+   <div class="col-md-12 form-group">
+          <button type="submit" class="btn btn-success btn-osx btn-lg">𝘽𝙪𝙮 𝘼𝙡𝙡</button>
+                      </div>
+</div></center>
+  </form>
+</div>
+    </section>
+           </div>
+                </div>
+            </div>
+        </div>
+    </div>
+					
+
+    <div class="container-fluid newsletter bg-primary py-5 my-5">
+        <div class="container py-5">
+            <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+                <h1 class="text-white mb-3"><span class="fw-light text-dark"></h1>
+                <p class="text-white mb-4"></p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-7 wow fadeIn" data-wow-delay="0.5s">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="container" style="height: auto;"></div>
+{% endblock %}

@@ -1,0 +1,168 @@
+{% extends 'doctor/doctor_home.html' %}
+{% block content %}
+
+<div class="chat-container">
+  <div class="chat-header">Chat with Patient</div>
+  <div class="chat-body" id="chat-body">
+    <!-- Display saved messages -->
+    {% for message in messages %}
+
+    <div class="message {% if message.utype == 'user' %}user{% else %}doctor{% endif %}">
+        <div class="text">{{ message.message }}
+          
+        </div>
+        <div class="sender"></div>
+    </div>
+    {% endfor %}
+  </div>
+  <form id="message-form" method="post" action="/doctor_chat/">
+    {% csrf_token %}
+    <div class="chat-input">
+        <input type="hidden" name="user_id" value="{{ data.id }}">
+        <input type="text" name="message" class="input-field" id="message-input" placeholder="Type your message..." required> <br><br>
+        <button type="submit" class="send-btn">Send</button>
+    </div>
+  </form>
+</div>
+
+<script>
+var isUserTurn = true; // Boolean to keep track of whose turn it is to send a message
+
+function sendMessage(event) {
+  event.preventDefault(); // Prevent the form from submitting in the traditional way
+  
+  var messageInput = document.getElementById("message-input");
+  var messageText = messageInput.value;
+  if (messageText.trim() === "") {
+    return; // If the message is empty, do nothing
+  }
+
+  var chatBody = document.getElementById("chat-body");
+
+  // Create a new message element based on whose turn it is
+  var sender = isUserTurn ? "User" : "Doctor";
+  var messageElement = createMessageElement(sender, messageText);
+  chatBody.appendChild(messageElement);
+
+  // Toggle the turn
+  isUserTurn = !isUserTurn;
+
+  // Clear the input field after sending the message
+  messageInput.value = "";
+
+  // Scroll to the bottom of the chat body to show the latest message
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function createMessageElement(sender, text) {
+  var messageElement = document.createElement("div");
+  messageElement.classList.add("message");
+  messageElement.classList.add(sender.toLowerCase()); // Add class based on sender
+
+  var textElement = document.createElement("div");
+  textElement.classList.add("text");
+  textElement.textContent = text;
+
+  var senderElement = document.createElement("div");
+  senderElement.classList.add("sender");
+  senderElement.textContent = sender;
+
+  messageElement.appendChild(textElement);
+  messageElement.appendChild(senderElement);
+
+  return messageElement;
+}
+</script>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #90bc79;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.chat-container {
+  max-width: 400px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.chat-header {
+  background-color: #f3f8f1;
+  color: #171616;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.chat-body {
+  padding: 20px;
+  overflow-y: scroll;
+  max-height: 300px;
+}
+
+.message {
+  margin-bottom: 20px;
+  overflow: hidden;
+  clear: both; /* Ensure proper clearing of floats */
+}
+
+.message.user .text {
+  background-color: #90bc79;
+  color: #fff;
+  border-radius: 10px 10px 10px 0;
+  float: left;
+  clear: both;
+  padding: 10px; /* Add padding to the text for better readability */
+  max-width: 70%; /* Limit the width of the message for better alignment */
+}
+
+.message.doctor .text {
+  background-color: #f3f8f1;
+  color: #171616;
+  border-radius: 10px 10px 0 10px;
+  float: right;
+  clear: both;
+  padding: 10px; /* Add padding to the text for better readability */
+  max-width: 70%; /* Limit the width of the message for better alignment */
+}
+
+.message .sender {
+  margin-top: 5px;
+  font-weight: bold;
+  clear: both; /* Ensure proper clearing of floats */
+  text-align: left; /* Align sender's name to the left */
+}
+
+.chat-input {
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border-top: 1px solid #ddd;
+}
+
+.input-field {
+  width: calc(100% - 40px);
+  border: none;
+  outline: none;
+  padding: 8px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.send-btn {
+  background-color: #90bc79;
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+</style>
+
+{% endblock %}

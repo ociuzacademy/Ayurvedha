@@ -1,0 +1,134 @@
+{% extends 'user/user_home.html' %}
+{% block content %}
+<div class="container-fluid bg-primary hero-header mb-5">
+    <div class="container text-center">
+        {% if error %}
+        <h1 class="display-4 text-white mb-3 animated slideInDown">{{error}}</h1>
+        {% else %}
+        <h1 class="display-4 text-white mb-3 animated slideInDown">Product Details</h1>
+      {% endif %}
+       
+    </div>
+</div>
+{% for i in data %}
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <img class="img-fluid animated pulse infinite" src="{{i.img.url}}">
+            </div>
+            <div class="col-lg-6 p-0">
+                <div class="container p-0">
+                    <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+                        <h1 class="text-primary mb-5"><span class="fw-light text-dark"></span></h1></div>
+                    <div class="row g-5">
+                        <div class="col-lg-12 wow fadeIn" data-wow-delay="0.1s">
+                            
+                            <div class="wow fadeIn" data-wow-delay="0.3s">
+                             
+                                    {% csrf_token %}
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="mail" class="form-control" id="subject" placeholder="Your Name" name="name" value="{{i.pname}}" disabled>
+                                                <label for="subject">Product Name</label>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="mail" class="form-control" id="subject" placeholder="Your Email" name="email" value="$ {{i.amnt}}" disabled>
+                                                <label for="subject"> Price</label>
+                                            </div>
+                                        </div>
+        
+                                       
+                                        
+                                        </div>
+                                      <br>
+
+                                      <div class="cart-add">
+                                        <form action="{% url 'add_to_cart' %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="ii" value="{{i.id}}">
+                                        <input type="number" name="number" value="1" id="number" style="height: 40px; width: 60px; border: 2px solid #080808; line-height: 50px; text-align: center;" required>&nbsp;&nbsp;&nbsp;
+
+
+                                      <!--  <button type="submit" class="btn btn-6">Buy Now</button> -->
+                                      <a onclick="this.href='/add_to_cart/?id={{i.id}}&number=' + document.getElementById('number').value">
+                                        <button type="button" class="btn btn-6" style="border: 2px solid #080808; border-radius: 0; background-color: #080808; height: 100; width: 150px; color: white;">
+                                            <i class="fas fa-shopping-cart"></i> Add to cart
+                                        </button>
+                                    </a>
+                                   
+                                    
+                                    
+                                        </form>
+            
+                                        <!-- <div style="padding-top: 40px;"><a href="/usr_change_addr1/" style="text-decoration: underline;">Change Address?</a></div> -->
+                                        
+          
+                                    </div>
+
+
+
+
+
+                                        <!-- <form action="{% url 'add_to_cart' %}" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="ii" value="{{i.id}}">
+                                            <input type="number" class="form-control" name="number" value="1" required  id="number"><br>
+                                    
+                                            <a onclick = "this.href='/add_to_cart/?id={{i.id}}&number=' + document.getElementById('number').value">&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary">
+                                                𝘼𝙙𝙙 𝙏𝙤 𝘾𝙖𝙧𝙩</button></a>
+                                            
+                                     
+                                                &nbsp;&nbsp;
+                                       <a href="{% url 'user_view_shops' %}"  class="btn btn-primary w-55 py-6">Back</a> -->
+                                    
+                                 
+                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid newsletter bg-primary py-5 my-5">
+    <div class="container py-5">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="text-white mb-3"><span class="fw-light text-dark"></h1>
+            <p class="text-white mb-4"></p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-7 wow fadeIn" data-wow-delay="0.5s">
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    input:disabled {
+        cursor: no-drop !important;
+    }
+</style>
+
+{% endfor %}
+
+<!-- {% if error %}
+<script type="text/javascript">
+  swal("Error!", "{{error}}", "error");
+</script>
+{% endif %}
+
+{% endblock %} -->

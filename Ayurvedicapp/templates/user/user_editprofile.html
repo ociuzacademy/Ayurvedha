@@ -1,0 +1,98 @@
+{% extends 'user/user_home.html' %}
+{% block content %}
+<div class="container-fluid bg-primary hero-header mb-5">
+    <div class="container text-center">
+        <h1 class="display-4 text-white mb-3 animated slideInDown">Profile...</h1>
+       
+    </div>
+</div>
+{% for i in data %}
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <img class="img-fluid animated pulse infinite" src="/static/img/shampoo-1.png">
+            </div>
+            <div class="col-lg-6 p-0">
+                <div class="container p-0">
+                    <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+                        <h1 class="text-primary mb-5"><span class="fw-light text-dark"></span></h1></div>
+                    <div class="row g-5">
+                        <div class="col-lg-12 wow fadeIn" data-wow-delay="0.1s">
+                            
+                            <div class="wow fadeIn" data-wow-delay="0.3s">
+                                <form action="{% url 'user_editprofile' id=i.id %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="mail" class="form-control" id="subject" placeholder="Your Name" name="name" value="{{i.name}}" >
+                                                <label for="subject"> Name</label>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="mail" class="form-control" id="subject" placeholder="Your Email" name="email" value="{{i.email}}" >
+                                                <label for="subject"> Email</label>
+                                            </div>
+                                        </div>
+        
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="subject" placeholder="Your Username" name="uname" value="{{i.uname}}" >
+                                                <label for="subject">Username</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="password" class="form-control" id="subject" placeholder="Your Password" name="pswd" value="{{i.pswd}}" >
+                                                <label for="message"> Password</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="subject" placeholder="Your Address" name="adrs" value="{{i.adrs}}" >
+                                                <label for="message"> Address</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="subject" placeholder="Your Contact Number" name="phn" value="{{i.phn}}" >
+                                                <label for="message"> Contact Number</label>
+                                            </div>
+                                        </div>
+                                    
+                                        
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100 py-3" type="submit">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid newsletter bg-primary py-5 my-5">
+    <div class="container py-5">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="text-white mb-3"><span class="fw-light text-dark"></h1>
+            <p class="text-white mb-4"></p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-7 wow fadeIn" data-wow-delay="0.5s">
+               
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

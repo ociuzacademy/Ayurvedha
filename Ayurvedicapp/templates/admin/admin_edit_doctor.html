@@ -1,0 +1,107 @@
+
+{% extends 'admin/admin_home.html' %}
+{% block content %}
+    <div class="container-fluid bg-primary hero-header mb-5">
+        <div class="container text-center">
+            <h1 class="display-4 text-white mb-3 animated slideInDown">Add Doctor Details</h1>
+           
+        </div>
+    </div>
+    <!-- Hero End -->
+
+
+    <!-- Contact Info Start -->
+   
+    <!-- Contact Info End -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+                <h1 class="text-primary mb-5"><span class="fw-light text-dark"></span></h1></div>
+            <div class="row g-5">
+                <div class="col-lg-7 wow fadeIn" data-wow-delay="0.1s">
+                    
+                    <div class="wow fadeIn" data-wow-delay="0.3s">
+                        {% for i in data %}
+                        <form action="{% url 'admin_edit_doctor' id=i.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="mail" class="form-control" id="subject" placeholder="Your Name" name="name" value="{{i.name}}">
+                                        <label for="subject">Name </label>
+                                    </div>
+                                </div>
+                               
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="mail" class="form-control" id="subject" placeholder="Your Email" name="email" value="{{i.email}}">
+                                        <label for="subject"> Email</label>
+                                    </div>
+                                </div>
+                               
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="subject" placeholder="Your Address" name="adrs" value="{{i.adrs}}">
+                                        <label for="message"> Place</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="subject" placeholder="Your Contact Number" name="phn" value="{{i.phn}}">
+                                        <label for="message"> Contact Number</label>
+                                    </div>
+                                </div>
+                              
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="subject" placeholder="Your Contact Number" name="available_time" value="{{i.available_time}}">
+                                        <label for="message">Available Time</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="phn"></label>
+                                    <select class="form-select" id="phn" name="category" value="{{i.category}}">
+                                        <option value="Category">Category</option>
+                                        <option value="Pediatrics">Pediatrics</option>
+                                        <option value="ENT specialist">ENT specialist</option>
+                                        <option value="Surgeon">Surgeon</option>
+                                        <option value="Geriatrics">Geriatrics</option>
+                                        <option value="Toxicology">Toxicology</option>
+                                        
+                                    </select>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                        {% endfor %}
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+        
+
+    <!-- Newsletter Start -->
+    <div class="container-fluid newsletter bg-primary py-5 my-5">
+        <div class="container py-5">
+            <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+                <h1 class="text-white mb-3"><span class="fw-light text-dark"></h1>
+                <p class="text-white mb-4"></p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-7 wow fadeIn" data-wow-delay="0.5s">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
